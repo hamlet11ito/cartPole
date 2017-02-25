@@ -14,9 +14,9 @@ global  hLEG hTYRE1 hTYRE2 hCART hGROUND % IPM Leg and Center of Mass
 
 l = 1;
 
-w = 0.4*l;
-h = 0.25*w;
-r_tyre = 0.08*w;
+w = 0.7*l;
+h = 0.5*w;
+r_tyre = 0.15*w;
 % ------------ %
 % PROGRAM PART %
 % ------------ %
@@ -42,17 +42,17 @@ switch flag,
    
     
     % set axis range in meters
-    axis([-3 3 -3 3])
+    axis([-3.5 3.5 -1 1.8])
     
-    center1 = [-w*0.4 r_tyre];
-    center2 = [w*0.4 r_tyre];
+    center1 = [-w*0.33 r_tyre];
+    center2 = [w*0.33 r_tyre];
     
     
     % initialize plot handles
     
     hTYRE1 = rectangle('Position',[center1-r_tyre, 2*r_tyre 2*r_tyre] ,'Curvature',[1 1], 'FaceColor', [0.4 0.4 0.4], 'Edgecolor','none');
     hTYRE2 = rectangle('Position',[center2-r_tyre, 2*r_tyre 2*r_tyre] ,'Curvature',[1 1], 'FaceColor', [0.4 0.4 0.4], 'Edgecolor','none');
-    hCART = rectangle('Position',[-w/2 2*r_tyre w h], 'FaceColor', [0 0.6 0], 'Edgecolor','none');
+    hCART = rectangle('Position',[-w/2 2*r_tyre w h], 'Curvature',[.2 .2], 'FaceColor', [0 0.6 0], 'Edgecolor','none');
     hLEG  = plot( [0 0], [h/2+2*r_tyre (l+h/2+2*r_tyre)], 'Color', 'k', 'LineWidth', 4);
     hGROUND = plot([-10 10], [0 0], 'Color', 'k', 'LineWidth', 1);
 %     M(k) = getframe(gcf);
@@ -79,8 +79,8 @@ switch flag,
   case 2, 
 
     % update Tyres of cart by updating the center position
-    center1 = [(-w*0.4 + u(1)) r_tyre];
-    center2 = [(w*0.4+ u(1)) r_tyre];
+    center1 = [(-w*0.33 + u(1)) r_tyre];
+    center2 = [(w*0.33+ u(1)) r_tyre];
     hTYRE1.Position = [center1-r_tyre, 2*r_tyre 2*r_tyre];
     hTYRE2.Position = [center2-r_tyre, 2*r_tyre 2*r_tyre];
 
@@ -88,7 +88,7 @@ switch flag,
     hCART.Position = [(-w/2+u(1)) 2*r_tyre w h];
     
     % update LEG xy-vector data
-    set(hLEG, 'XData', [u(1) (u(1)+l*sin(u(2)))], 'YData', [h/2+2*r_tyre (l*cos(u(2))+h/2+2*r_tyre)]);
+    set(hLEG, 'XData', [u(1) (u(1)-l*sin(u(2)))], 'YData', [h/2+2*r_tyre (l*cos(u(2))+h/2+2*r_tyre)]);
     
     % force plot
     drawnow
