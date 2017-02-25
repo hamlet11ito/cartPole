@@ -1,7 +1,10 @@
-## Core latex/pdflatex auxiliary files:
+## Video files:
 *.avi
 *.mp4
 *.mpeg
+
+## Tex file
+*.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
